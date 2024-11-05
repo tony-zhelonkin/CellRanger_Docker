@@ -26,10 +26,10 @@ Create required directories for data organization:
 mkdir -p ~/cellranger_data/{fastqs,reference,output}
 ```
 
-### 3. Data Preparation
-Place your FASTQ files in `~/cellranger_data/fastqs/`
-Download reference data to `~/cellranger_data/reference/`
-Output will be generated in `~/cellranger_data/output/`
+### 3. Data Preparation 
+* Place your FASTQ files in `~/cellranger_data/fastqs/`
+* Download reference data to `~/cellranger_data/reference/`
+* Output will be generated in `~/cellranger_data/output/`
 
 ### 4. Run Analysis
 
