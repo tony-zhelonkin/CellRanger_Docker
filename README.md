@@ -23,6 +23,8 @@ Download reference data to `~/cellranger_data/reference/`
 Output will be generated in `~/cellranger_data/output/`
 
 ### 4. Run Analysis
+
+Non-interactive docker container run 
 ```bash
 docker run -v ~/cellranger_data:/data cellranger-atac \
     cellranger-atac count \
@@ -31,6 +33,36 @@ docker run -v ~/cellranger_data:/data cellranger-atac \
     --fastqs=/data/fastqs \
     --sample=SAMPLE_NAME
 ```
+
+Interactive docker container run
+```bash
+docker run -it -v ~/cellranger_data:/data cellranger-atac bash
+```
+This command: 
+* -it enables interactive terminal
+* -v mounts your local data directory
+* bash starts an interactive bash shell
+
+Once inside the container, you can: 
+* Navigate directories: cd /data
+* Check Cell Ranger ATAC version: cellranger-atac --version
+* Run commands directly: 
+```bash
+cellranger-atac count \
+    --id=run1 \
+    --reference=/data/reference/refdata-cellranger-arc-GRCh38-2020-A-2.0.0 \
+    --fastqs=/data/fastqs \
+    --sample=SAMPLE_NAME
+```
+* Explore outputs in real-time
+* Test different parameters
+* Exit container when done: exit
+
+The interactive session gives flexibility in monitoring the analysis within the container environment. 
+
+
+
+
 
 ## Input Requirements
 FASTQ Files 
@@ -69,6 +101,28 @@ The pipeline generates several key outputs in the `~/cellranger_data/output/run1
 7. `peaks.bed`: Called peaks in BED format.
 8. `fragments.tsv.gz`: Fragment file for custom analyses.
 
+## Key Metrics
+* Number of cells detected
+* Median fragments per cell
+* TSS enrichment score
+* Fraction of reads in peaks
+* Fragment size distribution
+
+## Analysis Results
+* Dimension reduction plots (UMAP/tSNE)
+* Clustering information
+* Peak annotations
+* Cell-type assignments (if reference is provided)
+
+## Resource Requirements
+Recommended specifications:
+
+RAM: 32GB minimum
+CPU: 8 cores minimum
+Storage: 500GB minimum
+
+
+
 
 ## Troubleshooting
 If you encounter issues:
@@ -77,9 +131,6 @@ If you encounter issues:
 2. Verify input data integrity and format.
 3. Check for sufficient disk space.
 4. Review logs in the output directory for specific error messages.
-
-
-
 
 
 ## Additional Resources
@@ -91,12 +142,6 @@ If you encounter issues:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
-
-
-
-
 
 ## Contact
 
