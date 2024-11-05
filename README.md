@@ -1,14 +1,23 @@
 # Cell Ranger ATAC Docker Pipeline
 
-This repository contains a Dockerized version of 10x Genomics Cell Ranger ATAC pipeline for processing single-cell ATAC-seq data.
+This repository contains a Dockerfile *"recipe"* of 10x Genomics Cell Ranger ATAC pipeline for processing ATAC-seq data.
 
 ## Quick Start
 
 ### 1. Build Docker Image
 
 ```bash
-docker build -t cellranger-atac .
+docker build -t cellranger-atac:latest .
 ```
+
+To log all the build process you can run 
+
+```bash
+docker build -t cellranger-atac:latest . > >(tee -a log.txt) 2> >(tee -a log.txt >&2)
+```
+* `> >(tee -a log.txt)` captures standard output (stdout) and appends it to log.txt 
+* `2> >(tee -a log.txt >&2)` captures standard error (stderr) and appends it to log.txt
+
 
 ### 2. Prepare Data Directories
 Create required directories for data organization:
