@@ -6,9 +6,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
     wget \
+    vim \
     tar \
     python3 \
     && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user with same UID/GID as your host user
+RUN groupadd -g 1001 cellranger && \
+    useradd -m -u 1001 -g cellranger cellranger
 
 WORKDIR /opt
 
@@ -18,8 +23,10 @@ RUN wget -O cellranger-atac-2.1.0.tar.gz "https://cf.10xgenomics.com/releases/ce
 
 ENV PATH=/opt/cellranger-atac-2.1.0:$PATH
 
-WORKDIR /data
+# Change ownership of installation
+RUN chown -R cellranger:cellranger /opt/cellranger-atac-2.1.0
 
-# To build the Docker image:
-#
-# docker build -t cellranger-atac .
+# Switch to non-root user
+USER cellranger
+
+WORKDIR /data
