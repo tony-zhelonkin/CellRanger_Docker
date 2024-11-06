@@ -150,7 +150,7 @@ If you encounter issues:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+10x Cell Ranger belongs to 10x. Licence is available [here](https://www.10xgenomics.com/legal/end-user-software-license-agreement). No changes or any kind of licence infringement, or violations have been introduced to the software
 
 ## Contact
 
